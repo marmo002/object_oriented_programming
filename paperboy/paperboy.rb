@@ -27,8 +27,22 @@ class Paperboy
   def deliver(start_address, end_address)
     a = [start_address, end_address].sort!
     a = (a.first..a.last).to_a
-    number_houses = a.length
-    return number_houses
+    no_paper_delivered = a.length
+
+    if no_paper_delivered == quota
+      @earnings += no_paper_delivered * 0.25
+    elsif no_paper_delivered > quota
+      @earnings += quota * 0.25
+      @earnings += (no_paper_delivered - quota) * 0.50
+    elsif no_paper_delivered < quota
+      @earnings += (no_paper_delivered * 0.25) - 2.00
+    end
+    @experience += no_paper_delivered
+
+  end
+
+  def report
+    "I am #{name}, I've delivered #{@experience} papers, and I've earned $#{@earnings} so far!"
   end
 
 end
