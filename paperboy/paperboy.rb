@@ -24,6 +24,11 @@ class Paperboy
     @quota = (@experience / 2) + 50
   end
 
-  
+  def deliver(start_address, end_address)
+    a = [start_address, end_address].sort!
+    a = (a.first..a.last).to_a
+    number_houses = a.length
+    return number_houses
+  end
 
 end
